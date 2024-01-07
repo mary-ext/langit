@@ -1,7 +1,7 @@
 import { type ComponentProps, onCleanup } from 'solid-js';
 
 export interface BlobImageProps extends Omit<ComponentProps<'img'>, 'src'> {
-	src: Blob | string;
+	src?: Blob | string;
 }
 
 interface BlobObject {
@@ -11,8 +11,8 @@ interface BlobObject {
 
 const map = new WeakMap<Blob, BlobObject>();
 
-export const getBlobSrc = (src: Blob | string) => {
-	if (typeof src === 'string') {
+export const getBlobSrc = (src: Blob | string | undefined) => {
+	if (!(src instanceof Blob)) {
 		return src;
 	}
 
